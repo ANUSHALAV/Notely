@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
-:root{
+:root {
     --primary-color: #4f46e5;
     --secondary-color: #6b7280;
     --background-color: #f9fafb;
@@ -9,7 +9,7 @@
     --paragraph-text-color: #555;
 }
 
-body{
+body {
     font-family: "Roboto", sans-serif;
 }
 
@@ -17,18 +17,15 @@ h2 {
     font-size: 2rem;
     font-weight: 600;
 }
+
 p {
     font-size: 1rem;
 }
 
-/* .app-container{
-    margin-inline:20px;
-} */
-
-.header{
-    height:calc(100vh - 90vh);
+.header {
+    height: calc(100vh - 90vh);
 }
 
-.main-container{
-    height:calc(100vh - 10vh);
+.main-container {
+    height: calc(100vh - 10vh);
 }

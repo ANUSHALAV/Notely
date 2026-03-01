@@ -1,14 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AddNotes } from '../add-notes/add-notes';
 
 @Component({
   selector: 'app-notes-list',
-  imports: [],
+  imports: [AddNotes],
   templateUrl: './notes-list.html',
   styleUrl: './notes-list.css',
 })
-export class NotesList {
+export class NotesList implements OnInit {
+  isAddNote: boolean = false; 
+  lstNotes: any[] = [];
 
-  onAddNote(){
-    
+  constructor() {
+  }
+
+  ngOnInit() {
+    this.getNotes();
+  }
+
+  getNotes() {
+    let totalData = JSON.parse(localStorage.getItem('notes') || '[]');
+    this.lstNotes = totalData;
   }
 }
