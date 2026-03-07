@@ -1,11 +1,11 @@
-@if(!isAddNote){
+@if(!isAddNote && !isEditNote){
 <div class="main-container p-6">
 
     <!-- Header -->
     <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-bold text-gray-800">My Notes</h2>
 
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow-md transition"
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow-md transition cursor-pointer"
             (click)="isAddNote = true">
             + Add Note
         </button>
@@ -15,20 +15,31 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
         @for(note of lstNotes; track note.id){
-        <div class="bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg transition duration-300 border border-gray-100">
+        <div
+            class="flex justify-between bg-white rounded-2xl p-4 shadow-sm hover:shadow-lg transition duration-300 border border-gray-100">
 
-            <h3 class="text-lg font-semibold text-gray-800 mb-1">
-                {{note.title}}
-            </h3>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-1">
+                    {{note.title}}
+                </h3>
 
-            <p class="text-gray-600 text-sm leading-relaxed">
-                {{note.description}}
-            </p>
-
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    {{note.description}}
+                </p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined cursor-pointer text-blue-600" (click)="onEdit(note.id)">
+                    edit
+                </span>
+                <span class="material-symbols-outlined cursor-pointer text-red-600" (click)="onDelete(note.id)">
+                    delete
+                </span>
+            </div>
+            
         </div>
         }@empty{
-        <div class="col-span-full text-center bg-white rounded-2xl p-10 shadow-sm">
-            <p class="text-gray-500 text-lg">📒 No Notes Yet</p>
+        <div class="col-span-full text-center">
+            <p class="text-gray-500 text-lg">No Notes Yet</p>
             <p class="text-gray-400 text-sm mt-1">Click “Add Note” to create your first note</p>
         </div>
         }
@@ -37,6 +48,6 @@
 </div>
 }
 
-@if(isAddNote){
-<app-add-notes></app-add-notes>
+@if(isAddNote||isEditNote){
+<app-add-notes [mode]="mode" [editId]="editId"></app-add-notes>
 }
