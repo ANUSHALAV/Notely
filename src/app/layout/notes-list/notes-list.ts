@@ -41,4 +41,10 @@ export class NotesList implements OnInit {
     this.mode = 'Edit';
     this.editId = id;
   }
+
+  onNoteAdded(){
+    this.isEditNote = false;
+    this.isAddNote = false;
+    this.getNotes();
+  }
 }

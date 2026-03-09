@@ -5,7 +5,8 @@
     <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-bold text-gray-800">My Notes</h2>
 
-        <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow-md transition cursor-pointer"
+        <button
+            class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl shadow-md transition cursor-pointer"
             (click)="isAddNote = true">
             + Add Note
         </button>
@@ -35,7 +36,7 @@
                     delete
                 </span>
             </div>
-            
+
         </div>
         }@empty{
         <div class="col-span-full text-center">
@@ -49,5 +50,5 @@
 }
 
 @if(isAddNote||isEditNote){
-<app-add-notes [mode]="mode" [editId]="editId"></app-add-notes>
+<app-add-notes [mode]="mode" [editId]="editId" (onNoteAdded)="onNoteAdded()"></app-add-notes>
 }

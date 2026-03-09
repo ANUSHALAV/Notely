@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Notes } from '../../models/notes.model';
 
@@ -11,6 +11,7 @@ import { Notes } from '../../models/notes.model';
 export class AddNotes {
   @Input() mode: string = 'Add';
   @Input() editId: number = 0;
+  @Output() onNoteAdded = new EventEmitter<void>();
 
   notesObj: Notes = {
     id: 0,
@@ -41,7 +42,7 @@ export class AddNotes {
       }
       if (this.mode == 'Edit') {
         let totalData = JSON.parse(localStorage.getItem('notes') || '[]');
-        let index = totalData.findIndex((x:Notes) => x.id == this.editId);
+        let index = totalData.findIndex((x: Notes) => x.id == this.editId);
         this.notesObj.modifiedOn = new Date();
         totalData[index] = this.notesObj;
         localStorage.setItem('notes', JSON.stringify(totalData));
@@ -53,6 +54,7 @@ export class AddNotes {
         createdOn: new Date(),
         modifiedOn: new Date(),
       };
+      this.onNoteAdded.emit();
     }
   }
 
